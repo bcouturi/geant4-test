@@ -50,7 +50,7 @@ namespace B1
 
     // Envelope parameters
     //
-    G4double env_sizeXY = 100 * cm, env_sizeZ = 100 * cm;
+    G4double env_sizeXY = 10 * m, env_sizeZ = 20 * m;
     G4Material *env_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
     // Option to switch on/off checking of volumes overlaps
@@ -92,7 +92,7 @@ namespace B1
                                         "Envelope"); // its name
 
     new G4PVPlacement(nullptr,                 // no rotation
-                      G4ThreeVector(0, 0, -1), // at (0,0,0)
+                      G4ThreeVector(0, 0, 0), 
                       logicEnv,                // its logical volume
                       "Envelope",              // its name
                       logicWorld,              // its mother  volume
@@ -131,12 +131,12 @@ namespace B1
     // Shape 2
     //
     G4Material *shape2_mat = nist->FindOrBuildMaterial("G4_Au");
-    G4ThreeVector pos2 = G4ThreeVector(0, -1 * cm, 7 * cm);
+    G4ThreeVector pos2 = G4ThreeVector(0, 0 * cm, 3 * m);
 
     // Trapezoid shape
-    G4double shape2_dxa = 12 * cm, shape2_dxb = 12 * cm;
-    G4double shape2_dya = 10 * cm, shape2_dyb = 16 * cm;
-    G4double shape2_dz = 0.02 * cm;
+    G4double shape2_dxa = 3 * m, shape2_dxb = 5 * cm;
+    G4double shape2_dya = 4 * m, shape2_dyb = 6 * m;
+    G4double shape2_dz = 1 * m;
     auto solidShape2 =
         new G4Trd("Shape2", // its name
                   0.5 * shape2_dxa, 0.5 * shape2_dxb, 0.5 * shape2_dya, 0.5 * shape2_dyb,
@@ -169,7 +169,7 @@ namespace B1
 
   G4VPhysicalVolume *DetectorConstruction::Construct()
   {
-    fParser.Read("LHCb_2025-v00.01.gdml");//output.gdml");
+    fParser.Read("output.gdml");//LHCb_2025-v00.01.gdml");
     G4VPhysicalVolume *gdmlWorld = fParser.GetWorldVolume();
     return gdmlWorld;
   }

@@ -4,62 +4,61 @@
   <define/>
 
   <materials>
-    <material Z="79" name="G4_Au0x3e2620e0" state="solid">
+    <material Z="79" name="G4_Au0x179ddd0" state="solid">
       <T unit="K" value="293.15"/>
       <MEE unit="eV" value="790"/>
       <D unit="g/cm3" value="19.32"/>
       <atom unit="g/mole" value="196.967"/>
     </material>
-    <isotope N="1" Z="1" name="H10x3e231660">
+    <isotope N="1" Z="1" name="H10x1748fb0">
       <atom unit="g/mole" value="1.00782503081372"/>
     </isotope>
-    <isotope N="2" Z="1" name="H20x3e1e2ba0">
+    <isotope N="2" Z="1" name="H20x1749d80">
       <atom unit="g/mole" value="2.01410199966617"/>
     </isotope>
-    <element name="H0x3dd889f0">
-      <fraction n="0.999885" ref="H10x3e231660"/>
-      <fraction n="0.000115" ref="H20x3e1e2ba0"/>
+    <element name="H0x1749070">
+      <fraction n="0.999885" ref="H10x1748fb0"/>
+      <fraction n="0.000115" ref="H20x1749d80"/>
     </element>
-    <material name="G4_Galactic0x3dd88d10" state="gas">
+    <material name="G4_Galactic0x177b200" state="gas">
       <T unit="K" value="2.73"/>
       <P unit="pascal" value="3e-18"/>
       <MEE unit="eV" value="21.8"/>
       <D unit="g/cm3" value="1e-25"/>
-      <fraction n="1" ref="H0x3dd889f0"/>
+      <fraction n="1" ref="H0x1749070"/>
     </material>
   </materials>
 
   <solids>
-    <trd lunit="mm" name="Shape20x3e228270" x1="120" x2="120" y1="100" y2="160" z="0.2"/>
-    <box lunit="mm" name="Envelope0x3e1e2160" x="1600" y="1600" z="1600"/>
-    <box lunit="mm" name="World0x3e23eb40" x="1200" y="1200" z="1200"/>
+    <trd lunit="mm" name="Shape20x179db60" x1="3000" x2="50" y1="4000" y2="6000" z="1000"/>
+    <box lunit="mm" name="Envelope0x174bb30" x="16000" y="16000" z="32000"/>
+    <box lunit="mm" name="World0x174bab0" x="12000" y="12000" z="24000"/>
   </solids>
 
   <structure>
-    <volume name="Shape20x3e247b20">
-      <materialref ref="G4_Au0x3e2620e0"/>
-      <solidref ref="Shape20x3e228270"/>
+    <volume name="Shape20x1783f30">
+      <materialref ref="G4_Au0x179ddd0"/>
+      <solidref ref="Shape20x179db60"/>
     </volume>
-    <volume name="Envelope0x3e2469f0">
-      <materialref ref="G4_Galactic0x3dd88d10"/>
-      <solidref ref="Envelope0x3e1e2160"/>
-      <physvol name="Shape20x3e2615f0">
-        <volumeref ref="Shape20x3e247b20"/>
-        <position name="Shape20x3e2615f0_pos" unit="mm" x="0" y="-10" z="70"/>
+    <volume name="Envelope0x1781970">
+      <materialref ref="G4_Galactic0x177b200"/>
+      <solidref ref="Envelope0x174bb30"/>
+      <physvol name="Shape20x17a0c70">
+        <volumeref ref="Shape20x1783f30"/>
+        <position name="Shape20x17a0c70_pos" unit="mm" x="0" y="0" z="3000"/>
       </physvol>
     </volume>
-    <volume name="World0x3e1e69d0">
-      <materialref ref="G4_Galactic0x3dd88d10"/>
-      <solidref ref="World0x3e23eb40"/>
-      <physvol name="Envelope0x3e246b00">
-        <volumeref ref="Envelope0x3e2469f0"/>
-        <position name="Envelope0x3e246b00_pos" unit="mm" x="0" y="0" z="-1"/>
+    <volume name="World0x1749420">
+      <materialref ref="G4_Galactic0x177b200"/>
+      <solidref ref="World0x174bab0"/>
+      <physvol name="Envelope0x17815b0">
+        <volumeref ref="Envelope0x1781970"/>
       </physvol>
     </volume>
   </structure>
 
   <setup name="Default" version="1.0">
-    <world ref="World0x3e1e69d0"/>
+    <world ref="World0x1749420"/>
   </setup>
 
 </gdml>
