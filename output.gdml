@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+
+  <define/>
+
+  <materials>
+    <material Z="79" name="G4_Au0x3e2620e0" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="790"/>
+      <D unit="g/cm3" value="19.32"/>
+      <atom unit="g/mole" value="196.967"/>
+    </material>
+    <isotope N="1" Z="1" name="H10x3e231660">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H20x3e1e2ba0">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="H0x3dd889f0">
+      <fraction n="0.999885" ref="H10x3e231660"/>
+      <fraction n="0.000115" ref="H20x3e1e2ba0"/>
+    </element>
+    <material name="G4_Galactic0x3dd88d10" state="gas">
+      <T unit="K" value="2.73"/>
+      <P unit="pascal" value="3e-18"/>
+      <MEE unit="eV" value="21.8"/>
+      <D unit="g/cm3" value="1e-25"/>
+      <fraction n="1" ref="H0x3dd889f0"/>
+    </material>
+  </materials>
+
+  <solids>
+    <trd lunit="mm" name="Shape20x3e228270" x1="120" x2="120" y1="100" y2="160" z="0.2"/>
+    <box lunit="mm" name="Envelope0x3e1e2160" x="1600" y="1600" z="1600"/>
+    <box lunit="mm" name="World0x3e23eb40" x="1200" y="1200" z="1200"/>
+  </solids>
+
+  <structure>
+    <volume name="Shape20x3e247b20">
+      <materialref ref="G4_Au0x3e2620e0"/>
+      <solidref ref="Shape20x3e228270"/>
+    </volume>
+    <volume name="Envelope0x3e2469f0">
+      <materialref ref="G4_Galactic0x3dd88d10"/>
+      <solidref ref="Envelope0x3e1e2160"/>
+      <physvol name="Shape20x3e2615f0">
+        <volumeref ref="Shape20x3e247b20"/>
+        <position name="Shape20x3e2615f0_pos" unit="mm" x="0" y="-10" z="70"/>
+      </physvol>
+    </volume>
+    <volume name="World0x3e1e69d0">
+      <materialref ref="G4_Galactic0x3dd88d10"/>
+      <solidref ref="World0x3e23eb40"/>
+      <physvol name="Envelope0x3e246b00">
+        <volumeref ref="Envelope0x3e2469f0"/>
+        <position name="Envelope0x3e246b00_pos" unit="mm" x="0" y="0" z="-1"/>
+      </physvol>
+    </volume>
+  </structure>
+
+  <setup name="Default" version="1.0">
+    <world ref="World0x3e1e69d0"/>
+  </setup>
+
+</gdml>
