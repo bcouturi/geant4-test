@@ -30,7 +30,7 @@
   </materials>
 
   <solids>
-    <trd lunit="mm" name="Shape20x179db60" x1="3000" x2="50" y1="4000" y2="6000" z="1000"/>
+    <trd lunit="mm" name="Shape20x179db60" x1="3000" x2="50" y1="4000" y2="6000" z="100"/>
     <box lunit="mm" name="Envelope0x174bb30" x="16000" y="16000" z="32000"/>
     <box lunit="mm" name="World0x174bab0" x="12000" y="12000" z="24000"/>
   </solids>
@@ -45,7 +45,7 @@
       <solidref ref="Envelope0x174bb30"/>
       <physvol name="Shape20x17a0c70">
         <volumeref ref="Shape20x1783f30"/>
-        <position name="Shape20x17a0c70_pos" unit="mm" x="0" y="0" z="3000"/>
+        <position name="Shape20x17a0c70_pos" unit="mm" x="0" y="0" z="1000"/>
       </physvol>
     </volume>
     <volume name="World0x1749420">

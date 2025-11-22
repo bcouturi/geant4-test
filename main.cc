@@ -62,13 +62,12 @@ int main(int argc, char** argv)
   // Construct the default run manager
   //
   auto runManager = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Default);
-
   // Set mandatory initialization classes
   //
   // Detector construction
   auto detector = new DetectorConstruction();
-  G4String paraWorldName = "PWorld";
-  detector->RegisterParallelWorld(new PWorld(paraWorldName));
+  // G4String paraWorldName = "PWorld";
+  // detector->RegisterParallelWorld(new PWorld(paraWorldName));
   runManager->SetUserInitialization(detector);
 
   // Physics list
@@ -78,15 +77,17 @@ int main(int argc, char** argv)
 
   // User action initialization
   runManager->SetUserInitialization(new ActionInitialization());
+  runManager->Initialize();
 
-  // // Initialize visualization with the default graphics system
-  // auto visManager = new G4VisExecutive(argc, argv);
-  // // Constructors can also take optional arguments:
-  // // - a graphics system of choice, eg. "OGL"
-  // // - and a verbosity argument - see /vis/verbose guidance.
-  // // auto visManager = new G4VisExecutive(argc, argv, "OGL", "Quiet");
-  // // auto visManager = new G4VisExecutive("Quiet");
-  // visManager->Initialize();
+
+  // Initialize visualization with the default graphics system
+  //auto visManager = new G4VisExecutive(argc, argv);
+  // Constructors can also take optional arguments:
+  // - a graphics system of choice, eg. "OGL"
+  // - and a verbosity argument - see /vis/verbose guidance.
+  // auto visManager = new G4VisExecutive(argc, argv, "OGL", "Quiet");
+  // auto visManager = new G4VisExecutive("Quiet");
+  //visManager->Initialize();
 
   // Get the pointer to the User Interface manager
   auto UImanager = G4UImanager::GetUIpointer();

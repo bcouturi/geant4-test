@@ -42,6 +42,7 @@ EventAction::EventAction(RunAction* runAction) : fRunAction(runAction) {}
 
 void EventAction::BeginOfEventAction(const G4Event*)
 {
+  G4cout << "EventAction::BeginOfEventAction called" << G4endl;
   fEdep = 0.;
 }
 
@@ -50,6 +51,7 @@ void EventAction::BeginOfEventAction(const G4Event*)
 void EventAction::EndOfEventAction(const G4Event*)
 {
   // accumulate statistics in run action
+  G4cout << "EventAction::EndOfEventAction called" << G4endl;
   fRunAction->AddEdep(fEdep);
 }
 

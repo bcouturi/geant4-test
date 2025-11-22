@@ -37,6 +37,8 @@
 #include "G4SystemOfUnits.hh"
 #include "G4Trd.hh"
 #include "G4GDMLParser.hh"
+#include "G4LogicalVolumeStore.hh"
+#include "G4SDManager.hh"
 
 namespace B1
 {
@@ -169,9 +171,37 @@ namespace B1
 
   G4VPhysicalVolume *DetectorConstruction::Construct()
   {
-    fParser.Read("output.gdml");//LHCb_2025-v00.01.gdml");
+    fParser.Read("simple.gdml");//LHCb_2025-v00.01.gdml");
     G4VPhysicalVolume *gdmlWorld = fParser.GetWorldVolume();
+
+  
+
     return gdmlWorld;
   }
+
+
+ void DetectorConstruction::ConstructSDandField() {
+
+ G4SDManager* sdManager = G4SDManager::GetSDMpointer();
+    fSensDet = new SensitiveDetector("Shape2SensDet");
+    sdManager->AddNewDetector(fSensDet);
+
+    G4LogicalVolumeStore* store = G4LogicalVolumeStore::GetInstance();
+    for (auto volume : *store) {
+        std::cout << "XXX " << volume->GetName() << std::endl;
+        if (volume->GetName() == "Shape2") {
+           std::cout << "XXX Attaching " << volume->GetName() << std::endl;
+            volume->SetSensitiveDetector(fSensDet);
+        }
+    }
+
+    G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+    for (auto lv : *lvStore) {
+        std::cout << "XXY Logical volume: " << lv->GetName()
+                  << " SD: " << (lv->GetSensitiveDetector() ? lv->GetSensitiveDetector()->GetName() : "none")
+                  << std::endl;
+    }
+
+ };
 
 } // namespace B1

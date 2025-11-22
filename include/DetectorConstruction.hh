@@ -32,6 +32,7 @@
 
 #include "G4VUserDetectorConstruction.hh"
 #include "G4GDMLParser.hh"
+#include "SensitiveDetector.hh"
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
@@ -49,12 +50,14 @@ namespace B1
 
     G4VPhysicalVolume *ConstructWrite();
     G4VPhysicalVolume *Construct() override;
+    void ConstructSDandField() override;
 
     G4LogicalVolume *GetScoringVolume() const { return fScoringVolume; }
 
   protected:
     G4LogicalVolume *fScoringVolume = nullptr;
     G4GDMLParser fParser;
+    SensitiveDetector* fSensDet = nullptr;
   };
 
 } // namespace B1
